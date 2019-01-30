@@ -1,10 +1,5 @@
 # Личный проект «Кекстаграм» [![Build status][travis-image]][travis-url]
 
-* Студент: [Alexander Strakhovenko](https://up.htmlacademy.ru/javascript/16/user/235995).
-* Наставник: `Неизвестно`.
-
----
-
 _Не удаляйте и не обращайте внимание на файлы:_<br>
 _`.editorconfig`, `.eslintrc`, `.gitattributes`, `.gitignore`, `.travis.yml`, `package-lock.json`, `package.json`._
 
