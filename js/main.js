@@ -1,6 +1,17 @@
 'use strict';
 
 (function () {
+
+  var IMAGE_WIDTH = 35;
+  var IMAGE_HEIGHT = 35;
+  var MIN_NUMBER = 1;
+  var MAX_NUMBER = 6;
+  var COUNT_TEXT = 3;
+  var MIN_LIKES = 15;
+  var MAX_LIKE = 200;
+  var MAX_RANDOM_NUMBER = 7;
+  var MAX_COUNT_NUMBER = 25;
+
   var commentsArray = [
     'Всё отлично! ',
     'В целом всё неплохо. Но не всё. ',
@@ -12,6 +23,7 @@
   var names = [
     'Кеша', 'Пух', 'Хома', 'Сергей', 'Вика'
   ]
+
   var template = document.querySelector('#picture').content;
   var fragment = document.createDocumentFragment();
   var pictures = document.querySelector('.pictures');
@@ -23,15 +35,6 @@
   var socialCommentCount = document.querySelector('.social__comment-count');
   var commentsLoader = document.querySelector('.comments-loader');
   var socialCaption = document.querySelector('.social__caption');
-  var IMAGE_WIDTH = 35;
-  var IMAGE_HEIGHT = 35;
-  var MIN_NUMBER = 1;
-  var MAX_NUMBER = 6;
-  var COUNT_TEXT = 3;
-  var MIN_LIKES = 15;
-  var MAX_LIKE = 200;
-  var MAX_RANDOM_NUMBER = 7;
-  var MAX_COUNT_NUMBER = 25;
 
   function getRandomNumber(min, max) {
     var rand = min + Math.random() * (max + 1 - min);
@@ -99,8 +102,8 @@
     pictures.appendChild(fragment);
   }
 
-  function showElement() {
-    bigPicture.classList.remove('hidden');
+  function showElement(element) {
+    element.classList.remove('hidden');
   }
 
   function getBigPicture(data) {
@@ -131,18 +134,14 @@
     socialComments.appendChild(newItem);
   }
 
-  function hideSocialCommentCount(element) {
-    element.classList.add('visually-hidden');
-  }
-
-  function hideCommentsLoader(element) {
+  function hideElement(element) {
     element.classList.add('visually-hidden');
   }
 
   renderPhotos();
-  showElement();
+  //showElement(bigPicture);
   getBigPicture(picturesData);
-  hideSocialCommentCount(socialCommentCount);
-  hideCommentsLoader(commentsLoader);
+  hideElement(socialCommentCount);
+  hideElement(commentsLoader);
   getNewListComments();
 })();
