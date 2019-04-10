@@ -17,6 +17,7 @@
   var effectsList = document.querySelector('.effects__list');
   var effectLevelPin = document.querySelector('.effect-level__pin');
   var effectLevelValue = document.querySelector('.effect-level__value');
+  var mapPinMain = document.querySelector('.map__pin--main')
 
   function getUploadForm(element) {
     uploadFile.addEventListener('change', function () {
@@ -65,6 +66,10 @@
       imgUploadPreview.className = effectsPreview + '--' + target.value;
     });
   }
+
+  effectLevelPin.addEventListener('mouseup', function () {
+    console.log('hello');
+  });
 
   getEffectPicture();
   getUploadForm(imageUpload);
