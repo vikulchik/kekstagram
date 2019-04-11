@@ -17,26 +17,48 @@
   var effectsList = document.querySelector('.effects__list');
   var effectLevelPin = document.querySelector('.effect-level__pin');
   var effectLevelValue = document.querySelector('.effect-level__value');
-  var mapPinMain = document.querySelector('.map__pin--main')
+  var mapPinMain = document.querySelector('.map__pin--main');
+  var textDescription = document.querySelector('.text__description');
+
+  function getCloseElement(element) {
+    element.classList.add('hidden');
+  }
+
+  function getOpenElement(element) {
+    element.classList.remove('hidden');
+  }
+
+  function getCloseElementByEsc(e) {
+    if (e.keyCode === ESC) {
+      getCloseElement(imageUpload);
+    }
+  }
 
   function getUploadForm(element) {
     uploadFile.addEventListener('change', function () {
-      element.classList.remove('hidden');
+      getOpenElement(element);
     });
   }
 
   function getCloseForm(element) {
     uploadCancel.addEventListener('click', function (e) {
       e.preventDefault();
-      element.classList.add('hidden');
+      getCloseElement(element);
     });
   }
 
-  document.addEventListener('keydown', function (e) {
-    if (e.keyCode === ESC) {
-      imageUpload.classList.add('hidden');
-    }
-  });
+  function getCloseEsc() {
+    document.addEventListener('keydown', getCloseElementByEsc);
+  }
+
+  function toggleListener() {
+    textDescription.addEventListener('focus', function () {
+      document.removeEventListener('keydown', getCloseElementByEsc);
+    });
+    textDescription.addEventListener('blur', function () {
+      document.addEventListener('keydown', getCloseElementByEsc);
+    });
+  }
 
   scaleControlValue.setAttribute('max', MAX_SCALE);
   scaleControlValue.setAttribute('min', MIN_SCALE);
@@ -72,6 +94,8 @@
   });
 
   getEffectPicture();
+  toggleListener();
+  getCloseEsc();
   getUploadForm(imageUpload);
   getCloseForm(imageUpload);
 })();
