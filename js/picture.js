@@ -15,7 +15,6 @@
   var scaleControlValue = document.querySelector('.scale__control--value');
   var imgUploadPreview = document.querySelector('.img-upload__preview').querySelector('img');
   var effectsList = document.querySelector('.effects__list');
-  var effectLevelPin = document.querySelector('.effect-level__pin');
   var effectLevelValue = document.querySelector('.effect-level__value');
   var mapPinMain = document.querySelector('.map__pin--main');
   var textDescription = document.querySelector('.text__description');
@@ -92,10 +91,6 @@
       imgUploadPreview.className = effectsPreview + '--' + target.value;
     });
   }
-
-  effectLevelPin.addEventListener('mouseup', function () {
-    console.log('hello');
-  });
 
   getEffectPicture();
   toggleListener(textDescription);
