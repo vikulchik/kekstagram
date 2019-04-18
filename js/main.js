@@ -22,7 +22,7 @@
   ];
   var names = [
     'Кеша', 'Пух', 'Хома', 'Сергей', 'Вика'
-  ]
+  ];
 
   var template = document.querySelector('#picture').content;
   var fragment = document.createDocumentFragment();
@@ -43,7 +43,7 @@
   }
 
   function getNewCommentsArray(min, max) {
-    var randomComments = commentsArray[Math.floor(Math.random() * commentsArray.length)];
+    var randomComments = commentsArray[getRandomNumber(0, commentsArray.length)];
     var resultComments = '';
     for (var i = 0; i < getRandomNumber(min, max); ++i) {
       resultComments = resultComments + randomComments;
@@ -67,7 +67,7 @@
     return arr;
   }
 
-  function getPhoto(i) {
+  function getPhoto() {
     return {
       url: 'photos/' + getRandomNumber(MIN_NUMBER, MAX_COUNT_NUMBER) + '.jpg',
       likes: getRandomNumber(MIN_LIKES, MAX_LIKE),
@@ -87,18 +87,18 @@
 
   var picturesData = getPicturesData(MAX_COUNT_NUMBER);
 
-  function getElementTemplate(picturesData) {
+  function getElementTemplate(pictureData) {
     var pictureElement = template.cloneNode(true);
-    pictureElement.querySelector('img').src = picturesData.url;
-    pictureElement.querySelector('.picture__likes').innerHTML = picturesData.likes;
-    pictureElement.querySelector('.picture__comments').innerHTML = picturesData.comments.length;
+    pictureElement.querySelector('img').src = pictureData.url;
+    pictureElement.querySelector('.picture__likes').innerHTML = pictureData.likes;
+    pictureElement.querySelector('.picture__comments').innerHTML = pictureData.comments.length;
     return pictureElement;
   }
 
   function renderPhotos() {
-    for (var i = 0; i < picturesData.length; i++) {
-      fragment.appendChild(getElementTemplate(picturesData[i]));
-    }
+    picturesData.forEach(function (item, i, arr) {
+      fragment.appendChild(getElementTemplate(arr[i]));
+    });
     pictures.appendChild(fragment);
   }
 
@@ -107,12 +107,12 @@
   }
 
   function getBigPicture(data) {
-    for (var i = 0; i < data.length; i++) {
-      bigPictureImage.src = data[i].url;
-      likesCount.innerHTML = data[i].likes;
-      commentsCount.innerHTML = data[i].comments.length;
+    data.forEach(function (item, i, arr) {
+      bigPictureImage.src = arr[i].url;
+      likesCount.innerHTML = arr[i].likes;
+      commentsCount.innerHTML = arr[i].comments.length;
       socialCaption.innerHTML = '';
-    }
+    });
   }
 
   function getNewListComments() {

@@ -61,27 +61,30 @@
     });
   }
 
-  scaleControlValue.setAttribute('max', MAX_SCALE);
-  scaleControlValue.setAttribute('min', MIN_SCALE);
-  scaleControlValue.value = '100%';
-
-  scaleControlSmaller.addEventListener('click', function () {
-    parseScaleControlValue = parseInt(scaleControlValue.value, 10);
-    if (parseScaleControlValue > MIN_SCALE) {
-      scaleControlValue.value = (parseScaleControlValue - STEP) + '%';
-      parseScaleControlValue -= STEP;
-      imgUploadPreview.style.transform = 'scale(' + parseScaleControlValue / 100 + ')';
-    }
-  });
-
-  scaleControlBigger.addEventListener('click', function () {
+  function scalePictureBigger() {
     parseScaleControlValue = parseInt(scaleControlValue.value, 10);
     if (parseScaleControlValue < MAX_SCALE) {
       scaleControlValue.value = (parseScaleControlValue + STEP) + '%';
       parseScaleControlValue += STEP;
       imgUploadPreview.style.transform = 'scale(' + parseScaleControlValue / 100 + ')';
     }
-  });
+  }
+  function scalePictureSmaller() {
+    parseScaleControlValue = parseInt(scaleControlValue.value, 10);
+    if (parseScaleControlValue > MIN_SCALE) {
+      scaleControlValue.value = (parseScaleControlValue - STEP) + '%';
+      parseScaleControlValue -= STEP;
+      imgUploadPreview.style.transform = 'scale(' + parseScaleControlValue / 100 + ')';
+    }
+  }
+
+  scaleControlValue.setAttribute('max', MAX_SCALE);
+  scaleControlValue.setAttribute('min', MIN_SCALE);
+  scaleControlValue.value = '100%';
+
+  scaleControlSmaller.addEventListener('click', scalePictureSmaller);
+
+  scaleControlBigger.addEventListener('click', scalePictureBigger);
 
   function getEffectPicture() {
     effectsList.addEventListener('click', function (evt) {
