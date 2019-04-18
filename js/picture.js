@@ -19,6 +19,7 @@
   var effectLevelValue = document.querySelector('.effect-level__value');
   var mapPinMain = document.querySelector('.map__pin--main');
   var textDescription = document.querySelector('.text__description');
+  var textHashtags = document.querySelector('.text__hashtags');
 
   function getCloseElement(element) {
     element.classList.add('hidden');
@@ -51,11 +52,11 @@
     document.addEventListener('keydown', getCloseElementByEsc);
   }
 
-  function toggleListener() {
-    textDescription.addEventListener('focus', function () {
+  function toggleListener(elem) {
+    elem.addEventListener('focus', function () {
       document.removeEventListener('keydown', getCloseElementByEsc);
     });
-    textDescription.addEventListener('blur', function () {
+    elem.addEventListener('blur', function () {
       document.addEventListener('keydown', getCloseElementByEsc);
     });
   }
@@ -94,7 +95,8 @@
   });
 
   getEffectPicture();
-  toggleListener();
+  toggleListener(textDescription);
+  toggleListener(textHashtags);
   getCloseEsc();
   getUploadForm(imageUpload);
   getCloseForm(imageUpload);
