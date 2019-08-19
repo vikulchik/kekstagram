@@ -2,47 +2,26 @@
 
 (function () {
   var effectLevelPin = document.querySelector('.effect-level__pin');
-  var effectLevel = document.querySelector('.effect-level');
-  effectLevelPin.addEventListener('mousedown', function (e) {
-    e.preventDefault();
-    var startCoords = {
-      x: e.clientX
-    };
+  var effectLevelLine = document.querySelector('.effect-level__line');
+  var lineWidth = 453;
 
-    var dragged = false;
-    var onMouseMove = function (moveEvt) {
-      moveEvt.preventDefault();
-      dragged = true;
+  effectLevelPin.addEventListener('mousedown', function () {
+    var rectLine = effectLevelLine.getBoundingClientRect();
 
-      var shift = {
-        x: startCoords.x - moveEvt.clientX
-      };
-
-      startCoords = {
-        x: moveEvt.clientX
-      };
-
-      effectLevelPin.style.left = (effectLevelPin.offsetLeft - shift.x) + 'px';
-
-    };
-    var onMouseUp = function (upEvt) {
-      upEvt.preventDefault();
-
-      document.removeEventListener('mousemove', onMouseMove);
-      document.removeEventListener('mouseup', onMouseUp);
-
-      if (dragged) {
-        var onClickPreventDefault = function (evt) {
-          evt.preventDefault();
-          effectLevelPin.removeEventListener('click', onClickPreventDefault);
-        };
-        effectLevelPin.addEventListener('click', onClickPreventDefault);
+    function move(e) {
+      var shiftX = e.clientX - rectLine.left;
+      if (shiftX <= 0 || shiftX >= lineWidth) {
+        return;
       }
+      effectLevelPin.style.left = shiftX + 'px';
+    }
 
-    };
-
-    document.addEventListener('mousemove', onMouseMove);
-    document.addEventListener('mouseup', onMouseUp);
-  });
+    function clean() {
+      document.removeEventListener('mousemove', move);
+      document.removeEventListener('mouseup', clean);
+    }
+    document.addEventListener('mousemove', move);
+    document.addEventListener('mouseup', clean);
+  })
 
 })();
