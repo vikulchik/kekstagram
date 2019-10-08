@@ -63,6 +63,7 @@
       });
     }
 
+
     getEffectPicture()
 
     function clean() {
